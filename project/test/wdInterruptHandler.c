@@ -22,6 +22,10 @@ __interrupt_vec(WDT_VECTOR) WDT(){/* 250 interrupts/sec */
     blink_count = 0;
     buzzer_set_period(0);
   }
+  else if (++blink_count == 0 && button_state == 2) {
+    play_song();
+    blink_count++;
+  }
   
 
 

@@ -1,6 +1,10 @@
 #include <msp430.h>
 #include "stateMachines.h"
 #include "led.h"
+#include "buzzer.h"
+
+//static int song_state = 0;
+
 
 char toggle_red()/* always toggle! */
 {
@@ -42,3 +46,32 @@ void state_advance()/* alternate between toggling red & green */
   led_changed = changed;
   led_update();
 }
+
+void play_song() {
+  static int curr_beat = 0;
+
+  switch(curr_beat) {
+  case 0:
+    buzzer_set_period(1315); //playes E
+    curr_beat++;
+    break;
+  case 1:
+    buzzer_set_period(1174); //plays D
+    curr_beat++;
+    break;
+  case 2:
+    buzzer_set_period(1046); //plays C
+    curr_beat++;
+    break;
+  case 3:
+    buzzer_set_period(1174); // plays D
+    curr_beat++;
+    break;
+  default:
+      curr_beat = 0;
+  }//end switch
+  
+  
+
+}//end play_song method
+
