@@ -13,17 +13,15 @@ __interrupt_vec(WDT_VECTOR) WDT(){/* 250 interrupts/sec */
   if (++blink_count == 125 && button_state == 0) {
     state_advance();
     blink_count = 0;
-    //adding this
     buzzer_set_period(1000);
   }
   //adding this
   else if (++blink_count == 0 && button_state == 1) {
-    state_advance();
+    play_police(); //plays jaws theme
     blink_count = 0;
-    buzzer_set_period(0);
   }
   else if (++blink_count == 0 && button_state == 2) {
-    play_song();
+    play_twinkle();//plays twinkle twinkle little star
     blink_count++;
   }
   
